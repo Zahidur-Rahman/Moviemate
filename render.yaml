@@ -1,0 +1,51 @@
+services:
+  - type: web
+    name: moviemate-fullstack
+    env: python
+    buildCommand: |
+      # Install Python dependencies
+      pip install -r requirements.txt
+      
+      # Build React frontend (Node.js is pre-installed on Render)
+      cd moviemate-frontend
+      npm install
+      npm run build
+      cd ..
+      
+      # Copy React build to Django static files (expected at static/react-build)
+      mkdir -p moviemate/static/react-build
+      cp -r moviemate-frontend/dist/* moviemate/static/react-build/
+      
+      # Collect static files and migrate database
+      cd moviemate
+      python manage.py collectstatic --noinput
+      python manage.py migrate
+    startCommand: "cd moviemate && gunicorn moviemate.wsgi:application --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: moviemate.production_settings
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com,localhost,127.0.0.1"
+      - key: CSRF_TRUSTED_ORIGINS
+        value: "https://*.onrender.com"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: moviemate-db
+          property: connectionString
+      - key: WEB_CONCURRENCY
+        value: "4"
+      - key: DJANGO_SUPERUSER_USERNAME
+        value: "admin"
+      - key: DJANGO_SUPERUSER_EMAIL
+        value: "admin@moviemate.com"
+      - key: DJANGO_SUPERUSER_PASSWORD
+        generateValue: true
+
+databases:
+  - name: moviemate-db
+    databaseName: moviemate
+    user: moviemate

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieMate - Movie Details</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="/">🎬 MovieMate</a>
+            </div>
+            <div class="nav-menu">
+                <div class="user-info" id="userInfo" style="display: none;">
+                    <span id="welcomeMessage"></span>
+                    <button id="logoutBtn" class="logout-btn">Logout</button>
+                </div>
+                <div class="auth-buttons" id="authButtons">
+                    <a href="/login/" class="login-link">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="back-button">
+                <a href="/" class="back-link">← Back to Movies</a>
+            </div>
+
+            <div id="loadingSpinner" class="loading-spinner">
+                <div class="spinner"></div>
+                <p>Loading movie details...</p>
+            </div>
+
+            <div id="errorContainer" class="error-container" style="display: none;">
+                <p id="errorMessage"></p>
+                <button id="retryBtn" class="retry-btn">Retry</button>
+            </div>
+
+            <div id="movieDetailContainer" class="movie-detail-container" style="display: none;">
+                <!-- Movie details will be loaded here -->
+            </div>
+
+            <div id="reviewsSection" class="reviews-section" style="display: none;">
+                <h3>Reviews</h3>
+                
+                <div id="addReviewSection" class="add-review-section" style="display: none;">
+                    <h4>Add Your Review</h4>
+                    <form id="reviewForm" class="review-form">
+                        <div class="form-group">
+                            <label for="rating">Rating (1-5)</label>
+                            <select id="rating" name="rating" required>
+                                <option value="">Select Rating</option>
+                                <option value="1">1 ⭐</option>
+                                <option value="2">2 ⭐⭐</option>
+                                <option value="3">3 ⭐⭐⭐</option>
+                                <option value="4">4 ⭐⭐⭐⭐</option>
+                                <option value="5">5 ⭐⭐⭐⭐⭐</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Review</label>
+                            <textarea id="description" name="description" rows="4" placeholder="Write your review..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Submit Review</button>
+                    </form>
+                </div>
+
+                <div id="reviewsList" class="reviews-list">
+                    <!-- Reviews will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/movie-detail.js"></script>
+</body>
+</html>

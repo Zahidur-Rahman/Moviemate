@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieMate - Dashboard</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>🎬 MovieMate</h1>
+            </div>
+            <div class="nav-menu">
+                <div class="user-info" id="userInfo" style="display: none;">
+                    <span id="welcomeMessage"></span>
+                    <button id="logoutBtn" class="logout-btn">Logout</button>
+                </div>
+                <div class="auth-buttons" id="authButtons">
+                    <a href="/login/" class="login-link">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2>Movie Collection</h2>
+                <div class="filters">
+                    <input type="text" id="searchInput" placeholder="Search movies..." class="search-input">
+                    <select id="platformFilter" class="filter-select">
+                        <option value="">All Platforms</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="loadingSpinner" class="loading-spinner">
+                <div class="spinner"></div>
+                <p>Loading movies...</p>
+            </div>
+
+            <div id="errorContainer" class="error-container" style="display: none;">
+                <p id="errorMessage"></p>
+                <button id="retryBtn" class="retry-btn">Retry</button>
+            </div>
+
+            <div id="moviesGrid" class="movies-grid">
+                <!-- Movies will be loaded here dynamically -->
+            </div>
+
+            <div id="pagination" class="pagination" style="display: none;">
+                <button id="prevBtn" class="page-btn">Previous</button>
+                <span id="pageInfo"></span>
+                <button id="nextBtn" class="page-btn">Next</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Movie Detail Modal -->
+    <div id="movieModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <div id="movieDetails">
+                <!-- Movie details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>

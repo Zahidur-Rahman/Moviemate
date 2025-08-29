@@ -1,0 +1,16 @@
+# pyproject.toml
+
+[project]
+name = "moviemate"
+version = "0.1.0"
+dependencies = [
+    "Django",
+    "django-cors-headers>=4.7.0",
+    "django-filter>=25.1",
+    "djangorestframework",
+    "djangorestframework-simplejwt>=5.5.1",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
