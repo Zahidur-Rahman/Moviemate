@@ -40,3 +40,9 @@ echo "React build copied to moviemate/static/react-build and template updated"
 cd moviemate
 python3 manage.py collectstatic --noinput --settings=moviemate.production_settings
 python3 manage.py migrate --settings=moviemate.production_settings
+
+# Create superuser if environment variables are set
+if [ -n "$DJANGO_SUPERUSER_USERNAME" ] && [ -n "$DJANGO_SUPERUSER_EMAIL" ] && [ -n "$DJANGO_SUPERUSER_PASSWORD" ]; then
+    python3 manage.py createsuperuser --noinput --settings=moviemate.production_settings
+    echo "Superuser created successfully"
+fi
